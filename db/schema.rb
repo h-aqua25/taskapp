@@ -12,7 +12,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_220_818_090_642) do
+ActiveRecord::Schema[7.0].define(version: 20_220_824_101_239) do
+  create_table 'tasks', charset: 'utf8mb4', force: :cascade do |t|
+    t.string 'name', null: false, comment: 'タスク名'
+    t.datetime 'end_date', comment: '終了期限'
+    t.integer 'priority', default: 1, comment: '優先順位: 0:低(low), 1:普通(normal), 2:高(high)'
+    t.integer 'status', default: 0, comment: 'ステータス: 0:未着手(untouched), 1:着手中(touched), 2:完了(completed)'
+    t.text 'explanation', comment: '説明文'
+    t.bigint 'user_id', null: false, comment: 'ユーザID'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_tasks_on_user_id'
+  end
+
   create_table 'users', charset: 'utf8mb4', force: :cascade do |t|
     t.string 'name', default: '', null: false
     t.string 'email', default: '', null: false
@@ -25,4 +37,6 @@ ActiveRecord::Schema[7.0].define(version: 20_220_818_090_642) do
     t.index ['email'], name: 'index_users_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
+
+  add_foreign_key 'tasks', 'users'
 end
