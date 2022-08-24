@@ -3,8 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'tasks/index', type: :view do
-  let!(:user) { create(:user) }
-  let!(:tasks) { 11.times.map { create(:task, user_id: user.id) } }
+  let!(:tasks) { create_list(:task, 11) }
 
   before(:each) do
     assign(:tasks, tasks)
@@ -19,7 +18,6 @@ RSpec.describe 'tasks/index', type: :view do
       expect(rendered).to match(/#{task.priority}/)
       expect(rendered).to match(/#{task.status}/)
       expect(rendered).to match(/#{task.explanation}/)
-      expect(rendered).to match(/#{task.user_id}/)
     end
   end
 end

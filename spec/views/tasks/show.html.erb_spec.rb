@@ -3,8 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'tasks/show', type: :view do
-  let!(:user) { create(:user) }
-  let!(:task) { create(:task, user_id: user.id) }
+  let!(:task) { create(:task) }
 
   before(:each) do
     @task = assign(:task, task)
@@ -18,6 +17,5 @@ RSpec.describe 'tasks/show', type: :view do
     expect(rendered).to match(/#{task.priority}/)
     expect(rendered).to match(/#{task.status}/)
     expect(rendered).to match(/#{task.explanation}/)
-    expect(rendered).to match(/#{user.id}/)
   end
 end

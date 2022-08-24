@@ -5,6 +5,8 @@ require 'rails_helper'
 RSpec.describe '/tasks', type: :request do
   let!(:user) { create(:user) }
 
+  before { sign_in user }
+
   describe 'GET /index' do
     let!(:tasks) { create_list(:task, 11) }
 
