@@ -13,8 +13,6 @@ Rails.application.routes.draw do
     get 'logout', to: 'users/sessions#destroy'
   end
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root 'tasks#index'
+  resources :tasks
 end
