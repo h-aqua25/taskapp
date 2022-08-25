@@ -4,23 +4,23 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_task, only: %i[show edit update destroy]
 
-  # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all
+    query = Task.all
+    query = Task.search_keyword(search_params['keyword']) if search_params['keyword'].present?
+    query = Task.search_status(search_params['status']) if search_params['status'].present? && search_params['status'] != 'other'
+    query = Task.sort_by_keyword(search_params['sort']) if search_params['sort'].present?
+
+    @tasks = query
   end
 
-  # GET /tasks/1 or /tasks/1.json
   def show; end
 
-  # GET /tasks/new
   def new
     @task = Task.new
   end
 
-  # GET /tasks/1/edit
   def edit; end
 
-  # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
 
@@ -35,7 +35,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
     respond_to do |format|
       if @task.update(task_params)
@@ -48,7 +47,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /tasks/1 or /tasks/1.json
   def destroy
     @task.destroy
 
@@ -60,12 +58,14 @@ class TasksController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_task
     @task = Task.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
+  def search_params
+    params.permit(:keyword, :status, :sort)
+  end
+
   def task_params
     params.require(:task).permit(:name, :end_date, :priority, :status, :explanation).merge(user_id: current_user.id)
   end
