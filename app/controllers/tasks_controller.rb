@@ -7,7 +7,9 @@ class TasksController < ApplicationController
   def index
     query = Task.all
     query = Task.search_keyword(search_params['keyword']) if search_params['keyword'].present?
-    query = Task.search_status(search_params['status']) if search_params['status'].present? && search_params['status'] != 'other'
+    if search_params['status'].present? && search_params['status'] != 'other'
+      query = Task.search_status(search_params['status'])
+    end
     query = Task.sort_by_keyword(search_params['sort']) if search_params['sort'].present?
 
     @tasks = query
