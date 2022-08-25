@@ -12,27 +12,27 @@
   <% end %>
 
   <div>
-    <%= form.label :name, style: "display: block" %>
+    <%= form.label 'タスク名', style: "display: block" %>
     <%= form.text_field :name %>
   </div>
 
   <div>
-    <%= form.label :end_date, style: "display: block" %>
+    <%= form.label '終了期限', style: "display: block" %>
     <%= form.datetime_field :end_date %>
   </div>
 
   <div>
-    <%= form.label :priority, style: "display: block" %>
-    <%= form.select :priority, ['low', 'normal', 'high'] %>
+    <%= form.label '優先順位', style: "display: block" %>
+    <%= form.select :priority, options_for_select(Task.priorities_i18n.invert), include_blank: "選択してください" %>
   </div>
 
   <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.select :status, ['untouched', 'touched', 'completed'] %>
+    <%= form.label 'ステータス', style: "display: block" %>
+    <%= form.select :status, options_for_select(Task.statuses_i18n.invert), include_blank: "選択してください" %>
   </div>
 
   <div>
-    <%= form.label :explanation, style: "display: block" %>
+    <%= form.label '説明', style: "display: block" %>
     <%= form.text_area :explanation %>
   </div>
 
