@@ -1,10 +1,21 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @task %>
-
+<table border="1">
+  <tr>
+    <th>タスク名</th>
+    <th>終了時刻</th>
+    <th>優先度</th>
+    <th>ステータス</th>
+    <th>説明</th>
+  </tr>
+  <tr>
+    <td><%= @task.name %></td>
+    <td><%= time_zone(@task.end_date) %></td>
+    <td><%= task_priority_enum_to_ja(@task.priority) %></td>
+    <td><%= task_status_enum_to_ja(@task.status) %></td>
+    <td><%= @task.explanation %></td>
+  </tr>
 <div>
-  <%= link_to "Edit this task", edit_task_path(@task) %> |
-  <%= link_to "Back to tasks", tasks_path %>
+  <%= link_to "編集する", edit_task_path(@task) %> |
+  <%= link_to "タスク一覧に戻る", tasks_path %>
 
-  <%= button_to "Destroy this task", @task, method: :delete %>
+  <%= button_to "このタスクを削除する", @task, method: :delete %>
 </div>

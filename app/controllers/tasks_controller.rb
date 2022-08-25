@@ -5,14 +5,14 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
 
   def index
-    query = Task.all
-    query = Task.search_keyword(search_params['keyword']) if search_params['keyword'].present?
-    if search_params['status'].present? && search_params['status'] != 'other'
-      query = Task.search_status(search_params['status'])
-    end
-    query = Task.sort_by_keyword(search_params['sort']) if search_params['sort'].present?
+    query = task_all
+    query = query.search_keyword(search_params['keyword']) if search_params['keyword'].present?
+    query = query.search_status(search_params['status']) if search_params['status'].present?
+    query = query.sort_by_keyword(search_params['sort']) if search_params['sort'].present?
 
     @tasks = query
+    @total_count = task_all.count
+    @searched_count = query.count
   end
 
   def show; end
@@ -59,6 +59,10 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def task_all
+    @task_all ||= Task.all
+  end
 
   def set_task
     @task = Task.find(params[:id])

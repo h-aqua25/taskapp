@@ -1,20 +1,20 @@
 <%= form_with(url: tasks_path, method: :get, local: true) do |form| %>
   <div>
-    <%= form.label :keyword, style: "display: block" %>
-    <%= form.text_field :keyword %>
+    <%= form.label 'キーワード検索', style: "display: block" %>
+    <%= form.text_field :keyword, placeholder: 'タスク名または説明からキーワード検索を行います' %>
   </div>
 
   <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.select :status, ['other', 'untouched', 'touched', 'completed'] %>
+    <%= form.label 'ステータスで絞り込む', style: "display: block" %>
+    <%= form.select :status, options_for_select(Task.statuses_i18n.invert), include_blank: "選択してください" %>
   </div>
 
   <div>
-    <%= form.label :sort, style: "display: block" %>
-    <%= form.select :sort, ['id_asc', 'id_desc', 'name_asc', 'name_desc'] %>
+    <%= form.label 'ソート', style: "display: block" %>
+    <%= form.select :sort, options_for_select({'ID昇順（デフォルト）' => 'id_asc', 'ID降順' => 'id_desc', 'タスク名昇順' => 'name_asc', 'タスク名降順' => 'name_desc'}) %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit '送信' %>
   </div>
 <% end %>
