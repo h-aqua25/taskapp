@@ -142,3 +142,13 @@ ja:
       not_saved:
         one: エラーが発生したため %{resource} は保存されませんでした。
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
+  enums:
+    task:
+      priority:
+        low: 低
+        normal: 普通
+        high: 高
+      status:
+        untouched: 未着手
+        touched: 未着中
+        completed: 完了
