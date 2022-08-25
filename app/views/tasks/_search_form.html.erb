@@ -1,0 +1,20 @@
+<%= form_with(url: tasks_path, method: :get, local: true) do |form| %>
+  <div>
+    <%= form.label :keyword, style: "display: block" %>
+    <%= form.text_field :keyword %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.select :status, ['other', 'untouched', 'touched', 'completed'] %>
+  </div>
+
+  <div>
+    <%= form.label :sort, style: "display: block" %>
+    <%= form.select :sort, ['id_asc', 'id_desc', 'name_asc', 'name_desc'] %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
