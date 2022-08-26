@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe 'labels/new', type: :view do
+  let!(:label) { build(:label) }
+
   before(:each) do
-    assign(:label, Label.new(
-                     name: 'MyString'
-                   ))
+    assign(:label, label)
   end
 
   it 'renders new label form' do

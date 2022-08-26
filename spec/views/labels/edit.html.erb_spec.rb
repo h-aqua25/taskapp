@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe 'labels/edit', type: :view do
+  let!(:label) { create(:label) }
+
   before(:each) do
-    @label = assign(:label, Label.create!(
-                              name: 'MyString'
-                            ))
+    @label = assign(:label, label)
   end
 
   it 'renders the edit label form' do
