@@ -122,19 +122,19 @@ RSpec.describe '/tasks', type: :request do
       let!(:task) { create(:task) }
 
       let(:invalid_attributes) do
-        { task: {
+        {
           name: 'task!' * 255,
           end_date: Time.current,
           priority: 'low',
           status: 'untouched',
           explanation: 'task_text!',
           user_id: user.id
-        } }
+        }
       end
 
       it "renders a successful response (i.e. to display the 'edit' template)" do
         patch task_url(task), params: { task: invalid_attributes }
-        expect(response.status).to eq 302
+        expect(response.status).to eq 422
       end
     end
   end
