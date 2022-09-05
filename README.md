@@ -22,7 +22,7 @@
 ### tasks
 - belongs_to: user
 - has_many: task_labels
-- has_many: labels, througth: task_labels
+- has_many: labels, through: task_labels
 
 |  物理名  |  論理名  |  型  |  オプション  |
 | ---- | ---- | ---- | ---- |
@@ -44,7 +44,7 @@
 
 ### labels
 - has_many: task_labels
-- has_many: tasks, througth: task_labels
+- has_many: tasks, through: task_labels
 
 |  物理名  |  論理名  |  型  |  オプション  |
 | ---- | ---- | ---- | ---- |
