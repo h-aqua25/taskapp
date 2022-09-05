@@ -5,6 +5,8 @@ require 'rails_helper'
 RSpec.describe Task, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_many(:task_labels).dependent(:destroy) }
+    it { is_expected.to have_many(:labels).through(:task_labels) }
   end
 
   describe 'validations' do

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @task_label %>
+
+<div>
+  <%= link_to "Edit this task label", edit_task_label_path(@task_label) %> |
+  <%= link_to "Back to task labels", task_labels_path %>
+
+  <%= button_to "Destroy this task label", @task_label, method: :delete %>
+</div>
